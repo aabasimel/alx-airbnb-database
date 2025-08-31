@@ -5,20 +5,6 @@ This folder has all the SQL scripts and documentation for my Airbnb database pro
 The database is set up to manage users, properties, bookings, payments, reviews, and messages.
 
 ---
-
-## What’s Inside
-
-- `schema.sql`  
-  The SQL script to create all the tables, constraints, and indexes.
-
-- `normalization.md`  
-  A document explaining how I normalized the database and made sure it follows 3NF (Third Normal Form).
-
-- `README.md`  
-  This file – a quick guide on what’s here and how to use it.
-
----
-
 ## Database Tables
 
 Here’s a quick rundown of the main tables:
@@ -41,3 +27,4 @@ All tables have primary keys, foreign keys, and extra indexes for better perform
 ```sql
 CREATE DATABASE airbnb_db;
 USE airbnb_db;
+
