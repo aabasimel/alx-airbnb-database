@@ -60,3 +60,13 @@ The database currently has the following entities:
 ```sql
 -- Optionally, remove total_price to avoid redundancy:
 -- total_price DECIMAL, NOT NULL
+Booking
+---------
+booking_id: UUID PRIMARY KEY, Indexed
+property_id: UUID, FOREIGN KEY REFERENCES Property(property_id)
+user_id: UUID, FOREIGN KEY REFERENCES User(user_id)
+start_date: DATE NOT NULL
+end_date: DATE NOT NULL
+total_price: DECIMAL NOT NULL  -- optional, could be removed to fully normalize
+status: ENUM('pending', 'confirmed', 'canceled') NOT NULL
+created_at: TIMESTAMP DEFAULT CURRENT_TIMESTAMP
