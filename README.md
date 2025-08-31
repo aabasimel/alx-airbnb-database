@@ -1,8 +1,5 @@
 # alx-airbnb-database
 
-
-# Airbnb Database Project
-
 ## About
 This repository contains the database design and scripts for a simplified Airbnb system.  
 It covers users, properties, bookings, payments, reviews, and messages. The project includes:
