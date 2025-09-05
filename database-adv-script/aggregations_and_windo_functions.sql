@@ -1,3 +1,5 @@
+
+----Write a query to find the total number of bookings made by each user, using the COUNT function and GROUP BY clause.
 SELECT 
     u.user_id,
     u.first_name,
@@ -9,6 +11,8 @@ LEFT JOIN Booking b
 GROUP BY u.user_id, u.first_name, u.last_name;
 
 
+
+---Use a window function (ROW_NUMBER, RANK) to rank properties based on the total number of bookings they have received.
 SELECT 
     p.property_id,
     p.name,
