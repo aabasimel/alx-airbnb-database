@@ -76,31 +76,3 @@ JOIN "User" u ON b.user_id = u.user_id
 JOIN "Property" p ON b.property_id = p.property_id
 LEFT JOIN "Payment" pay ON pay.booking_id = b.booking_id;
 
-
-# 3️⃣ Performance Analysis with EXPLAIN
-
-Running `EXPLAIN ANALYZE` revealed the following:
-
-| Step | Operation           | Cost   | Notes                                     |
-|------|-------------------|--------|------------------------------------------|
-| 1    | Seq Scan on Booking | High   | Full table scan, slow for large data     |
-| 2    | Seq Scan on User    | Medium | No index on user_id join column          |
-| 3    | Seq Scan on Property| Medium | No index on property_id join column      |
-| 4    | Seq Scan on Payment | Medium | No index on booking_id join column       |
-|      | Execution Time      | ~15 ms | Would scale poorly with large datasets   |
-
-### Identified Inefficiencies
-- Sequential scans on all tables  
-- Selecting all columns increases I/O  
-- No filtering → fetches all bookings  
-- Missing indexes on foreign key columns  
-
----
-
-# 4️⃣ Refactoring Steps
-
-### 🔧 4.1 Added Indexes
-```sql
-CREATE INDEX IF NOT EXISTS idx_booking_user_id ON "Booking"(user_id);
-CREATE INDEX IF NOT EXISTS idx_booking_property_id ON "Booking"(property_id);
-CREATE INDEX IF NOT EXISTS idx_payment_booking_id ON "Payment"(booking_id);
