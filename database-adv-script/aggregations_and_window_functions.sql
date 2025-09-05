@@ -13,6 +13,7 @@ GROUP BY u.user_id, u.first_name, u.last_name;
 
 
 ---Use a window function (ROW_NUMBER, RANK) to rank properties based on the total number of bookings they have received.
+
 SELECT 
     p.property_id,
     p.name,
