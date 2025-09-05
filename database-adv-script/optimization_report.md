@@ -4,7 +4,6 @@
 Retrieve all bookings along with user details, property details, and payment details, and optimize performance by reducing execution time through indexing and query refactoring.
 
 ---
-
 ## 2️⃣ Initial Query
 The initial query is saved in `perfomance.sql`:
 
@@ -32,7 +31,7 @@ JOIN "User" u ON b.user_id = u.user_id
 JOIN "Property" p ON b.property_id = p.property_id
 LEFT JOIN "Payment" pay ON pay.booking_id = b.booking_id;
 
-##3️⃣ Performance Analysis with EXPLAIN
+ 3️⃣ Performance Analysis with EXPLAIN
 
 Running EXPLAIN ANALYZE revealed the following:
 
@@ -52,7 +51,7 @@ No filtering → fetches all bookings
 
 Missing indexes on foreign key columns
 
-##4️⃣ Refactoring Steps
+4️⃣ Refactoring Steps
 🔧 4.1 Added Indexes
 CREATE INDEX IF NOT EXISTS idx_booking_user_id ON "Booking"(user_id);
 CREATE INDEX IF NOT EXISTS idx_booking_property_id ON "Booking"(property_id);
