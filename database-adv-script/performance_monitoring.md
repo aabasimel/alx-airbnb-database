@@ -23,18 +23,17 @@ I used `EXPLAIN ANALYZE` to monitor frequently used queries on the AirBnB databa
 EXPLAIN ANALYZE
 SELECT * FROM booking
 WHERE start_date BETWEEN '2025-01-01' AND '2025-01-31';
-Fetch all properties hosted by a specific host:
 ```
 ```sql
 EXPLAIN ANALYZE
 SELECT * FROM property
 WHERE host_id = '"43a7ce0d-dc0f-4d6b-b337-3d50a98b7719";
 ```
-sql
-Copy code
+```sql
 EXPLAIN ANALYZE
 SELECT * FROM review
 WHERE property_id = "43a7ce0d-dc0f-4d6b-b337-3d50a98b7719";
+```
 3. Identified Bottlenecks
 From the EXPLAIN ANALYZE results:
 
@@ -47,10 +46,6 @@ Joins between booking and users or property tables were slower when filtering on
 4. Implemented Changes
 Partitioned booking table by start_date:
 
-sql
-Copy code
--- Partitioning improved query speed for date-range filters
-Added additional indexes:
 
 ```sql
 CREATE INDEX idx_booking_user_id ON booking(user_id);
@@ -81,4 +76,3 @@ After index on property_id: ~0.01 sec
 Summary:
 Partitioning and proper indexing significantly reduced execution times. Query plans now show index scans instead of full table scans, improving overall database performance and responsiveness.
 
-6. Recommendations for Future Optimization
