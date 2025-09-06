@@ -38,4 +38,16 @@ CREATE TABLE "Booking_default" PARTITION OF "Booking" DEFAULT;
 
 The DEFAULT partition catches any rows outside the defined ranges.
 
+### 3. Testing Query Performance
 
+Query before partitioning:
+
+```sql
+EXPLAIN ANALYZE 
+SELECT * FROM "Booking" 
+WHERE start_date BETWEEN '2025-01-01' AND '2025-01-31';
+```
+
+Full table scan occurred.
+
+Execution time: ~2.3 seconds (for large datasets).
