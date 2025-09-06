@@ -50,4 +50,22 @@ WHERE start_date BETWEEN '2025-01-01' AND '2025-01-31';
 
 Full table scan occurred.
 
-Execution time: ~2.3 seconds (for large datasets).
+Execution time: ~0.487ms.
+
+Query after partitioning:
+
+``sql
+EXPLAIN ANALYZE 
+SELECT * FROM "Booking" 
+WHERE start_date BETWEEN '2025-01-01' AND '2025-01-31';
+
+```
+
+
+Only the Booking_2025_01 partition was scanned.
+
+Execution time: ~0.05 seconds.
+
+Partition pruning significantly reduced scanned rows and query time.
+
+
