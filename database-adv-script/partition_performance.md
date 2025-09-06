@@ -67,4 +67,12 @@ Execution time: ~0.05 seconds.
 
 Partition pruning significantly reduced scanned rows and query time.
 
+## 4. Observed Improvements
+
+| Metric                   | Before Partitioning       | After Partitioning                         |
+| ------------------------ | ------------------------- | ------------------------------------------ |
+| Rows scanned             | Entire table              | Only relevant partition                    |
+| Execution time (example) | ~0.487ms                  | ~0.05ms                                  |
+| Index usage              | Full table index          | Partition index                            |
+| Maintenance              | Harder                    | Easier (drop old partitions, bulk deletes) |
 
