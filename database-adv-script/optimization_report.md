@@ -30,8 +30,8 @@ FROM "Booking" b
 JOIN "User" u ON b.user_id = u.user_id
 JOIN "Property" p ON b.property_id = p.property_id
 LEFT JOIN "Payment" pay ON pay.booking_id = b.booking_id;
-
- 3️⃣ Performance Analysis with EXPLAIN
+```
+### 3️⃣ Performance Analysis with EXPLAIN
 
 Running EXPLAIN ANALYZE revealed the following:
 
@@ -51,16 +51,18 @@ No filtering → fetches all bookings
 
 Missing indexes on foreign key columns
 
-4️⃣ Refactoring Steps
+### 4️⃣ Refactoring Steps
 🔧 4.1 Added Indexes
+```sql
 CREATE INDEX IF NOT EXISTS idx_booking_user_id ON "Booking"(user_id);
 CREATE INDEX IF NOT EXISTS idx_booking_property_id ON "Booking"(property_id);
 CREATE INDEX IF NOT EXISTS idx_payment_booking_id ON "Payment"(booking_id);
-
+```
 
 Effect: Index scans replace sequential scans, reducing join cost.
 
 🔧 4.2 Optimized Query (Reduced Columns)
+```sql
 SELECT
     b.booking_id,
     b.start_date,
@@ -74,4 +76,5 @@ FROM "Booking" b
 JOIN "User" u ON b.user_id = u.user_id
 JOIN "Property" p ON b.property_id = p.property_id
 LEFT JOIN "Payment" pay ON pay.booking_id = b.booking_id;
+```
 
