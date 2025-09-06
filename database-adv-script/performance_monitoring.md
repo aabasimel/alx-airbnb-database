@@ -15,7 +15,7 @@ The goal of this exercise is to **monitor and refine database performance** by a
 
 ## 2. Monitoring Queries
 
-We used `EXPLAIN ANALYZE` to monitor frequently used queries on the AirBnB database, including:
+I used `EXPLAIN ANALYZE` to monitor frequently used queries on the AirBnB database, including:
 
 1. **Fetch bookings for a specific date range:**
 
@@ -24,19 +24,17 @@ EXPLAIN ANALYZE
 SELECT * FROM booking
 WHERE start_date BETWEEN '2025-01-01' AND '2025-01-31';
 Fetch all properties hosted by a specific host:
-
-sql
-Copy code
+```
+```sql
 EXPLAIN ANALYZE
 SELECT * FROM property
-WHERE host_id = 'some-uuid';
-Fetch all reviews for a specific property:
-
+WHERE host_id = '"43a7ce0d-dc0f-4d6b-b337-3d50a98b7719";
+```
 sql
 Copy code
 EXPLAIN ANALYZE
 SELECT * FROM review
-WHERE property_id = 'some-uuid';
+WHERE property_id = "43a7ce0d-dc0f-4d6b-b337-3d50a98b7719";
 3. Identified Bottlenecks
 From the EXPLAIN ANALYZE results:
 
@@ -54,11 +52,11 @@ Copy code
 -- Partitioning improved query speed for date-range filters
 Added additional indexes:
 
-sql
-Copy code
+```sql
 CREATE INDEX idx_booking_user_id ON booking(user_id);
 CREATE INDEX idx_property_host_id ON property(host_id);
 CREATE INDEX idx_review_property_id ON review(property_id);
+```
 Ensured foreign key columns are indexed to speed up joins.
 
 5. Post-Optimization Query Performance
