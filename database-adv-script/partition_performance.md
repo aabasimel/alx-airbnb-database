@@ -42,12 +42,11 @@ The DEFAULT partition catches any rows outside the defined ranges.
 
 Query before partitioning:
 
-``` sql
+
 EXPLAIN ANALYZE 
 SELECT * FROM "Booking" 
 WHERE start_date BETWEEN '2025-01-01' AND '2025-01-31';
 
-```
 
 Full table scan occurred.
 
@@ -55,7 +54,7 @@ Execution time: ~0.487ms.
 
 Query after partitioning:
 
-`` sql
+``` sql
 EXPLAIN ANALYZE 
 SELECT * FROM "Booking" 
 WHERE start_date BETWEEN '2025-01-01' AND '2025-01-31';
